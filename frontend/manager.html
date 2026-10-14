@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Luigi Pizzeria – Managerbereich</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Kopfbereich -->
+  <header class="hero">
+    <div class="hero-text">
+      <h1>Luigi Pizzeria</h1>
+
+      <p class="hero-subtitle">Managerbereich</p>
+
+      <p>
+        Willkommen im Managerbereich der Pizzeria Luigi. Hier können Sie
+        Bestellungen erfassen, Produkte verwalten und wichtige Kennzahlen
+        übersichtlich auswerten.
+      </p>
+    </div>
+
+    <div class="hero-image">
+      <img src="pizzeria_Bild.avif" alt="Pizza der Pizzeria Luigi">
+    </div>
+  </header>
+
+
+  <!-- Auswertungen -->
+  <div class="gruppen-titel">
+    <span>Auswertungen</span>
+  </div>
+
+  <section>
+    <h2>Dashboard</h2>
+
+    <p class="bereich-text">
+      Wählen Sie ein Datum aus, um die wichtigsten Kennzahlen des Tages
+      auf einen Blick zu sehen.
+    </p>
+
+    <div class="filterbereich">
+      <label for="dashboardDatum">Datum auswählen:</label>
+
+      <input
+        type="date"
+        id="dashboardDatum"
+        value="2026-06-25"
+      >
+
+      <button type="button" onclick="ladeDashboard()">
+        Dashboard laden
+      </button>
+    </div>
+
+    <div class="dashboard">
+      <div class="karte">
+        <span class="karten-label">Reservierungen</span>
+
+        <p id="anzahlReservierungen" class="kennzahl">-</p>
+
+        <span class="karten-info">
+          für das ausgewählte Datum
+        </span>
+      </div>
+
+      <div class="karte">
+        <span class="karten-label">Bestellungen</span>
+
+        <p id="anzahlBestellungen" class="kennzahl">-</p>
+
+        <span class="karten-info">
+          ohne stornierte Bestellungen
+        </span>
+      </div>
+
+      <div class="karte">
+        <span class="karten-label">Umsatz</span>
+
+        <p id="umsatz" class="kennzahl">-</p>
+
+        <span class="karten-info">
+          aus abgeschlossenen Bestellungen
+        </span>
+      </div>
+    </div>
+  </section>
+
+
+  <section>
+    <details>
+      <summary>
+        <h2>Produkte anzeigen</h2>
+      </summary>
+
+      <p class="bereich-text">
+        Öffnen Sie die Produktübersicht, um Preise, Kategorien,
+        Beschreibungen und den aktuellen Status aller Produkte einzusehen.
+      </p>
+
+      <button type="button" onclick="ladeProdukte()">
+        Produktübersicht aktualisieren
+      </button>
+
+      <div class="tabellen-container">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Produktname</th>
+              <th>Preis</th>
+              <th>Beschreibung</th>
+              <th>Aktiv</th>
+              <th>Kategorie</th>
+            </tr>
+          </thead>
+
+          <tbody id="produktTabelle"></tbody>
+        </table>
+      </div>
+    </details>
+  </section>
+
+
+  <section>
+    <h2>Bestellte Produkte anzeigen</h2>
+
+    <p class="bereich-text">
+      Wählen Sie ein Datum aus, um alle an diesem Tag bestellten Produkte
+      und die zugehörigen Bestelldetails anzuzeigen.
+    </p>
+
+    <div class="filterbereich">
+      <label for="bestellteProdukteDatum">Datum auswählen:</label>
+
+      <input
+        type="date"
+        id="bestellteProdukteDatum"
+        value="2026-06-25"
+      >
+
+      <button type="button" onclick="ladeBestellteProdukte()">
+        Bestellte Produkte anzeigen
+      </button>
+    </div>
+
+    <div class="tabellen-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Bestellung ID</th>
+            <th>Zeitpunkt</th>
+            <th>Status</th>
+            <th>Produktname</th>
+            <th>Menge</th>
+            <th>Einzelpreis</th>
+            <th>Positionswert</th>
+          </tr>
+        </thead>
+
+        <tbody id="bestellteProdukteTabelle"></tbody>
+      </table>
+    </div>
+  </section>
+
+
+  <section>
+    <h2>Top 5 Produkte</h2>
+
+    <p class="bereich-text">
+      Hier sehen Sie die fünf meistverkauften Produkte. Die Ergebnisse
+      werden übersichtlich als Diagramm und Tabelle dargestellt.
+    </p>
+
+    <button type="button" onclick="ladeTopProdukte()">
+      Top-Produkte aktualisieren
+    </button>
+
+    <div
+      id="topProdukteDiagramm"
+      class="diagramm"
+      aria-label="Diagramm der meistverkauften Produkte"
+    ></div>
+
+    <div class="tabellen-container">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Produktname</th>
+            <th>Kategorie</th>
+            <th>Verkaufte Menge</th>
+            <th>Umsatz</th>
+          </tr>
+        </thead>
+
+        <tbody id="topProdukteTabelle"></tbody>
+      </table>
+    </div>
+  </section>
+
+
+  <!-- Bestellverwaltung -->
+  <div class="gruppen-titel">
+    <span>Bestellverwaltung</span>
+  </div>
+
+  <section>
+    <h2>Neue Bestellung anlegen</h2>
+
+    <p class="bereich-text">
+      Erfassen Sie eine neue Bestellung, indem Sie den Tisch, den
+      zuständigen Mitarbeiter, das gewünschte Produkt und die Menge auswählen.
+    </p>
+
+    <form id="bestellungForm">
+      <label for="bestellungTisch">Tisch:</label>
+      <select id="bestellungTisch" required></select>
+
+      <label for="bestellungMitarbeiter">Mitarbeiter:</label>
+      <select id="bestellungMitarbeiter" required></select>
+
+      <label for="bestellungProdukt">Produkt:</label>
+      <select id="bestellungProdukt" required></select>
+
+      <label for="bestellmenge">Bestellmenge:</label>
+
+      <input
+        type="number"
+        id="bestellmenge"
+        min="1"
+        step="1"
+        placeholder="Zum Beispiel: 2"
+        required
+      >
+
+      <button type="submit">
+        Bestellung anlegen
+      </button>
+    </form>
+
+    <p
+      id="bestellungMeldung"
+      class="meldung"
+      aria-live="polite"
+    ></p>
+  </section>
+
+
+  <!-- Produktverwaltung -->
+  <div class="gruppen-titel">
+    <span>Produktverwaltung</span>
+  </div>
+
+  <section>
+    <h2>Neues Produkt hinzufügen</h2>
+
+    <p class="bereich-text">
+      Erweitern Sie das Sortiment um ein neues Produkt. Bitte tragen Sie
+      alle Produktinformationen vollständig ein.
+    </p>
+
+    <form id="produktForm">
+      <label for="produktname">Produktname:</label>
+
+      <input
+        type="text"
+        id="produktname"
+        placeholder="Zum Beispiel: Pizza Vegetaria"
+        required
+      >
+
+      <label for="preis">Preis:</label>
+
+      <input
+        type="number"
+        id="preis"
+        min="0.01"
+        step="0.01"
+        placeholder="Zum Beispiel: 9,50"
+        required
+      >
+
+      <label for="beschreibung">Beschreibung:</label>
+
+      <input
+        type="text"
+        id="beschreibung"
+        placeholder="Kurze Beschreibung des Produkts"
+        required
+      >
+
+      <label for="kategorieId">Kategorie:</label>
+      <select id="kategorieId" required></select>
+
+      <button type="submit">
+        Produkt hinzufügen
+      </button>
+    </form>
+
+    <p
+      id="produktMeldung"
+      class="meldung"
+      aria-live="polite"
+    ></p>
+  </section>
+
+
+  <section>
+    <h2>Produktpreis ändern</h2>
+
+    <p class="bereich-text">
+      Wählen Sie ein Produkt aus und tragen Sie den neuen Preis ein.
+      Produkte aus noch offenen Bestellungen können aus Gründen der
+      Datenkonsistenz nicht geändert werden.
+    </p>
+
+    <form id="preisForm">
+      <label for="preisProduktId">Produkt auswählen:</label>
+      <select id="preisProduktId" required></select>
+
+      <label for="neuerPreis">Neuer Preis:</label>
+
+      <input
+        type="number"
+        id="neuerPreis"
+        min="0.01"
+        step="0.01"
+        placeholder="Neuen Preis eingeben"
+        required
+      >
+
+      <button type="submit">
+        Preis aktualisieren
+      </button>
+    </form>
+
+    <p
+      id="preisMeldung"
+      class="meldung"
+      aria-live="polite"
+    ></p>
+  </section>
+
+
+  <section>
+    <h2>Produkt deaktivieren</h2>
+
+    <p class="bereich-text">
+      Deaktivieren Sie ein Produkt, wenn es vorübergehend nicht mehr
+      angeboten werden soll. Frühere Bestellungen bleiben dabei vollständig
+      erhalten.
+    </p>
+
+    <form id="deaktivierenForm">
+      <label for="deaktivierenProduktId">
+        Aktives Produkt auswählen:
+      </label>
+
+      <select id="deaktivierenProduktId" required></select>
+
+      <button type="submit">
+        Produkt deaktivieren
+      </button>
+    </form>
+
+    <p
+      id="deaktivierenMeldung"
+      class="meldung"
+      aria-live="polite"
+    ></p>
+  </section>
+
+
+  <section>
+    <h2>Produkt reaktivieren</h2>
+
+    <p class="bereich-text">
+      Aktivieren Sie ein zuvor deaktiviertes Produkt erneut, damit es
+      wieder für neue Bestellungen verfügbar ist.
+    </p>
+
+    <form id="reaktivierenForm">
+      <label for="reaktivierenProduktId">
+        Inaktives Produkt auswählen:
+      </label>
+
+      <select id="reaktivierenProduktId" required></select>
+
+      <button type="submit">
+        Produkt reaktivieren
+      </button>
+    </form>
+
+    <p
+      id="reaktivierenMeldung"
+      class="meldung"
+      aria-live="polite"
+    ></p>
+  </section>
+
+
+  <section>
+    <h2>Produkt löschen</h2>
+
+    <p class="bereich-text hinweis-text">
+      Bitte beachten Sie: Ein Produkt kann nur gelöscht werden, wenn es
+      noch nicht in einer Bestellung verwendet wurde. Bereits verwendete
+      Produkte sollten stattdessen deaktiviert werden.
+    </p>
+
+    <form id="loeschForm">
+      <label for="loeschProduktId">Produkt auswählen:</label>
+      <select id="loeschProduktId" required></select>
+
+      <button type="submit" class="button-gefahr">
+        Produkt endgültig löschen
+      </button>
+    </form>
+
+    <p
+      id="loeschMeldung"
+      class="meldung"
+      aria-live="polite"
+    ></p>
+  </section>
+
+
+  <script src="manager.js"></script>
+</body>
+</html>

@@ -1,0 +1,502 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 40px;
+  background: linear-gradient(135deg, #fff3e6, #f7f7f7);
+  color: #222;
+}
+
+/* Überschriften */
+
+h1 {
+  color: #8b0000;
+  font-size: 46px;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+h2 {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  color: #111;
+}
+
+/* Kopfbereich */
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 35px;
+  align-items: center;
+  background: linear-gradient(135deg, #ffffff, #fff4e6);
+  padding: 35px;
+  border-radius: 14px;
+  margin-bottom: 30px;
+  border-left: 8px solid #8b0000;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+}
+
+.hero-subtitle {
+  font-size: 24px;
+  font-weight: bold;
+  color: #8b0000;
+}
+
+.hero-text p {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.hero-image img {
+  display: block;
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* Gruppierung der Bereiche */
+
+.gruppen-titel {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 45px 0 18px;
+}
+
+.gruppen-titel::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: #d8c5b5;
+}
+
+.gruppen-titel span {
+  color: #8b0000;
+  font-size: 19px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Inhaltsbereiche */
+
+section {
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+}
+
+.bereich-text {
+  color: #555;
+  line-height: 1.6;
+  margin-top: 0;
+  margin-bottom: 22px;
+}
+
+/* Wichtiger Hinweis */
+
+.hinweis-text {
+  padding: 14px 16px;
+  background-color: #fff4e5;
+  color: #754500;
+  border-left: 5px solid #d97706;
+  border-radius: 7px;
+}
+
+/* Aufklappbare Produktübersicht */
+
+details summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  list-style: none;
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+details summary::before {
+  content: "▶";
+  color: #8b0000;
+  font-size: 17px;
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+details summary h2 {
+  display: inline;
+  margin: 0;
+}
+
+details[open] summary {
+  margin-bottom: 20px;
+}
+
+/* Buttons */
+
+button {
+  padding: 11px 19px;
+  margin: 15px 0;
+  cursor: pointer;
+  background-color: #8b0000;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: bold;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+button:hover {
+  background-color: #a60000;
+  box-shadow: 0 3px 8px rgba(139, 0, 0, 0.2);
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+.button-gefahr {
+  background-color: #721c24;
+}
+
+.button-gefahr:hover {
+  background-color: #54151b;
+}
+
+/* Formulare */
+
+label {
+  display: block;
+  margin-top: 12px;
+  font-weight: bold;
+}
+
+input,
+select {
+  padding: 10px;
+  margin: 6px 0 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  font-size: 15px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #8b0000;
+  box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.1);
+}
+
+form {
+  max-width: 520px;
+}
+
+form input,
+form select {
+  width: 100%;
+}
+
+/* Filter für Datum */
+
+.filterbereich {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.filterbereich label {
+  margin-top: 0;
+}
+
+.filterbereich input {
+  width: auto;
+  margin: 0;
+}
+
+.filterbereich button {
+  margin: 0;
+}
+
+/* Tabellen */
+
+.tabellen-container {
+  width: 100%;
+  margin-top: 25px;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  min-width: 750px;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: white;
+}
+
+.tabellen-container table {
+  margin-top: 0;
+}
+
+th,
+td {
+  padding: 11px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background-color: #eee;
+  color: #222;
+}
+
+tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+tbody tr:hover {
+  background-color: #fff5ed;
+}
+
+/* Meldungen */
+
+.meldung {
+  display: none;
+  margin-top: 18px;
+  padding: 13px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+.meldung:not(:empty) {
+  display: block;
+  background-color: #f3f4f6;
+  color: #333;
+  border-left: 5px solid #777;
+}
+
+.meldung.erfolg {
+  display: block;
+  background-color: #e8f5e9;
+  color: #1b5e20;
+  border-left: 5px solid #2e7d32;
+}
+
+.meldung.fehler {
+  display: block;
+  background-color: #ffebee;
+  color: #a31515;
+  border-left: 5px solid #c62828;
+}
+
+.meldung.warnung {
+  display: block;
+  background-color: #fff8e1;
+  color: #7a5100;
+  border-left: 5px solid #f9a825;
+}
+
+.meldung.info {
+  display: block;
+  background-color: #e8f1fb;
+  color: #164d7a;
+  border-left: 5px solid #1976d2;
+}
+
+/* Dashboard */
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin-top: 25px;
+}
+
+.karte {
+  background: linear-gradient(135deg, #ffffff, #f5f5f5);
+  border-left: 6px solid #8b0000;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.karte:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.1);
+}
+
+.karten-label {
+  font-size: 17px;
+  font-weight: bold;
+  color: #333;
+}
+
+.kennzahl {
+  margin: 15px 0;
+  color: #8b0000;
+  font-size: 38px;
+  font-weight: bold;
+}
+
+.karten-info {
+  color: #666;
+  font-size: 14px;
+}
+
+/* Balkendiagramm */
+
+.diagramm {
+  margin: 25px 0;
+  padding: 20px;
+  background-color: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+}
+
+.diagramm:empty {
+  display: none;
+}
+
+.diagramm-zeile {
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.diagramm-zeile:last-child {
+  margin-bottom: 0;
+}
+
+.diagramm-label {
+  font-weight: bold;
+}
+
+.diagramm-balken-hintergrund {
+  height: 30px;
+  overflow: hidden;
+  background-color: #e6e6e6;
+  border-radius: 20px;
+}
+
+.diagramm-balken {
+  min-width: 30px;
+  height: 30px;
+  padding-left: 10px;
+  background-color: #8b0000;
+  color: white;
+  border-radius: 20px;
+  font-weight: bold;
+  line-height: 30px;
+}
+
+/* Darstellung auf Tablets */
+
+@media (max-width: 900px) {
+  body {
+    margin: 25px;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-image img {
+    height: 280px;
+  }
+
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .diagramm-zeile {
+    grid-template-columns: 1fr;
+  }
+
+  .gruppen-titel {
+    margin-top: 35px;
+  }
+}
+
+/* Darstellung auf Smartphones */
+
+@media (max-width: 600px) {
+  body {
+    margin: 12px;
+  }
+
+  h1 {
+    font-size: 34px;
+  }
+
+  h2 {
+    font-size: 23px;
+  }
+
+  .hero {
+    gap: 20px;
+    padding: 24px;
+  }
+
+  .hero-subtitle {
+    font-size: 20px;
+  }
+
+  .hero-text p {
+    font-size: 16px;
+  }
+
+  .hero-image img {
+    height: 220px;
+  }
+
+  section {
+    padding: 22px;
+  }
+
+  .filterbereich {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .filterbereich input,
+  .filterbereich button {
+    width: 100%;
+  }
+
+  form {
+    max-width: 100%;
+  }
+
+  .gruppen-titel span {
+    font-size: 16px;
+  }
+}
